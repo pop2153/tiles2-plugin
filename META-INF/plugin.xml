@@ -1,0 +1,43 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin>
+    <name>Apache Tiles 2.0 plugin</name>
+    <description>Tiles 2.0 plugin</description>
+    <version>0.1</version>
+    <vendor logo="/icons/tiles2_logo.png" email="linux_china@hotmail.com">linux_china</vendor>
+    <idea-version since-build="7000"/>
+    <depends>com.intellij.javaee</depends>
+     <description><![CDATA[
+    <html>
+       Because Tiles 2.0 plugin conflicts with Struts Assistant plugin in Struts-Tiles. If you want to use this plugin, please disable Struts Assistant  temporarily.  <br/>
+       Tiles 2.0 plugin will scan web.xml to find the Tiles 2.0 configuration information, so you should modify web.xml to make Tiles 2 support first.
+    </html>
+    ]]></description>
+    <change-notes>
+        <![CDATA[
+                <ul>0.1 version
+                  <li>Code completion for template, definition reference in Tiles 2.0 config XML file</li>
+                  <li>Code completion for Tiles 2.0 taglib</li>
+                  <li>Code completion for attribute gap</li>
+                  <li>Auto detect Tiles 2.0 support in web.xml</li>
+               </ul>
+        ]]>
+    </change-notes>
+
+    <extensions xmlns="com.intellij">
+        <applicationService serviceInterface="org.intellij.tiles2.Tiles2Manager" serviceImplementation="org.intellij.tiles2.impl.Tiles2ManagerImpl"/>
+        <dom.fileDescription implementation="org.intellij.tiles2.Tiles2ConfigFileDescription"/>
+    </extensions>
+
+    <application-components>
+        <component>
+            <implementation-class>org.intellij.tiles2.Tiles2ApplicationComponent</implementation-class>
+        </component>
+    </application-components>
+    <project-components>
+        <component>
+            <implementation-class>org.intellij.tiles2.Tiles2ProjectComponent</implementation-class>
+        </component>
+    </project-components>
+
+
+</idea-plugin>
