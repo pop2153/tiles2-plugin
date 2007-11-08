@@ -69,6 +69,7 @@ public class Tiles2ProjectComponent implements ProjectComponent {
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "insertAttribute", new String[]{"name"}, putAttributeReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "getAsString", new String[]{"name"}, putAttributeReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "bean", new String[]{"classtype"}, putAttributeReferenceProvider);
+        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "item", new String[]{"classtype"}, putAttributeReferenceProvider);
     }
 
     public void disposeComponent() {
