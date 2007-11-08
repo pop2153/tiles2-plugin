@@ -14,7 +14,7 @@ import java.util.List;
 public interface Bean extends CommonDomModelElement {
 
     @Attribute("classtype")
-    public GenericAttributeValue<PsiClass> geClasstype();
+    public GenericAttributeValue<PsiClass> getClasstype();
 
     @SubTagList("set-property")
     public List<SetProperty> getSetPropertyList();
