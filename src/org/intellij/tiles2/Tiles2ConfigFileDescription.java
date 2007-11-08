@@ -19,5 +19,7 @@ public class Tiles2ConfigFileDescription extends DomFileDescription<TilesDefinit
         registerImplementation(PutAttribute.class, PutAttributeImpl.class);
         registerImplementation(PutListAttribute.class, PutListAttributeImpl.class);
         registerImplementation(AddAttribute.class, AddAttributeImpl.class);
+        registerImplementation(Bean.class, BeanImpl.class);
+        registerImplementation(SetProperty.class, SetPropertyImpl.class);
     }
 }
