@@ -17,4 +17,7 @@ public interface PutListAttribute extends CommonDomModelElement {
 
     @SubTagList("add-attribute")
     public List<AddAttribute> getAddAttributes();
+
+    @SubTagList("bean")
+    public List<Bean> getBeans();
 }
