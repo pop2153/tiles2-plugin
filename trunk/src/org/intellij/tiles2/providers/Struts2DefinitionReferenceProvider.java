@@ -1,6 +1,8 @@
 package org.intellij.tiles2.providers;
 
+import com.intellij.codeInsight.lookup.LookupValueFactory;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.xml.XmlFile;
@@ -8,6 +10,7 @@ import com.intellij.psi.xml.XmlTag;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomManager;
+import org.intellij.tiles2.Tiles2Constants;
 import org.intellij.tiles2.Tiles2Manager;
 import org.intellij.tiles2.dom.Definition;
 import org.intellij.tiles2.dom.TilesDefinitions;
@@ -63,7 +66,7 @@ public class Struts2DefinitionReferenceProvider extends BaseReferenceProvider {
             }
 
             public Object[] getVariants() {
-                List<String> variants = new ArrayList<String>();
+                List<Object> variants = new ArrayList<Object>();
                 List<Definition> definitionList = Tiles2Manager.getInstance().getAllDefinition(getElement());
                 //use definition in current xml file if config files absent
                 if (definitionList.size() == 0) {
@@ -73,7 +76,9 @@ public class Struts2DefinitionReferenceProvider extends BaseReferenceProvider {
                     }
                 }
                 for (Definition definition : definitionList) {
-                    variants.add(definition.getName().getStringValue());
+                    String defintionName = definition.getName().getStringValue();
+                    if (defintionName!=null && defintionName.length()>0)
+                        variants.add(LookupValueFactory.createLookupValue(defintionName, Tiles2Constants.TILES2_DEFINITION_LOGO));
                 }
                 return variants.toArray();
             }
