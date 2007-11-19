@@ -2,7 +2,7 @@
 <idea-plugin>
     <name>Apache Tiles 2.0 plugin</name>
     <description>Tiles 2.0 plugin</description>
-    <version>0.1</version>
+    <version>0.2</version>
     <vendor logo="/icons/tiles2_logo.png" email="linux_china@hotmail.com">linux_china</vendor>
     <idea-version since-build="7000"/>
     <depends>com.intellij.javaee</depends>
@@ -14,6 +14,9 @@
     ]]></description>
     <change-notes>
         <![CDATA[
+               <ul>0.2 version
+                  <li>Code completion for definition in struts 2.0</li>
+               </ul>
                 <ul>0.1 version
                   <li>Code completion for template, definition reference in Tiles 2.0 config XML file</li>
                   <li>Code completion for Tiles 2.0 taglib</li>
