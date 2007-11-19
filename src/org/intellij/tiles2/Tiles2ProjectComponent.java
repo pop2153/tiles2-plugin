@@ -11,8 +11,7 @@ import com.intellij.psi.impl.source.resolve.reference.impl.providers.JavaClassRe
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.URIReferenceProvider;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.util.xml.DomManager;
-import org.intellij.tiles2.filters.AttributeReferenceDefinitionFilter;
-import org.intellij.tiles2.filters.AttributeReferenceTemplateFilter;
+import org.intellij.tiles2.filters.*;
 import org.intellij.tiles2.providers.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -70,6 +69,7 @@ public class Tiles2ProjectComponent implements ProjectComponent {
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "getAsString", new String[]{"name"}, putAttributeReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "bean", new String[]{"classtype"}, putAttributeReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "item", new String[]{"classtype"}, putAttributeReferenceProvider);
+        registry.registerReferenceProvider(new Struts2ReferenceDefinitionFilter(), XmlTag.class, new Struts2DefinitionReferenceProvider());
     }
 
     public void disposeComponent() {
