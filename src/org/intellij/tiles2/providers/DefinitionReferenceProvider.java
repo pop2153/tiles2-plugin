@@ -1,11 +1,13 @@
 package org.intellij.tiles2.providers;
 
+import com.intellij.codeInsight.lookup.LookupValueFactory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.xml.XmlAttributeValue;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomManager;
+import org.intellij.tiles2.Tiles2Constants;
 import org.intellij.tiles2.Tiles2Manager;
 import org.intellij.tiles2.dom.Definition;
 import org.intellij.tiles2.dom.TilesDefinitions;
@@ -36,7 +38,7 @@ public class DefinitionReferenceProvider extends BaseReferenceProvider {
             }
 
             public Object[] getVariants() {
-                List<String> variants = new ArrayList<String>();
+                List<Object> variants = new ArrayList<Object>();
                 List<Definition> definitionList = Tiles2Manager.getInstance().getAllDefinition(getElement());
                 //use definition in current xml file if config files absent
                 if (definitionList.size() == 0) {
@@ -46,7 +48,9 @@ public class DefinitionReferenceProvider extends BaseReferenceProvider {
                     }
                 }
                 for (Definition definition : definitionList) {
-                    variants.add(definition.getName().getStringValue());
+                    String definitionName = definition.getName().getStringValue();
+                    if (definitionName != null && definitionName.length() > 0)
+                        variants.add(LookupValueFactory.createLookupValue(definitionName, Tiles2Constants.TILES2_DEFINITION_LOGO));
                 }
                 return variants.toArray();
             }
