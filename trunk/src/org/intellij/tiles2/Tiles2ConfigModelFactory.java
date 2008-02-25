@@ -1,14 +1,19 @@
 package org.intellij.tiles2;
 
 import com.intellij.javaee.model.xml.ParamValue;
-import com.intellij.javaee.model.xml.web.*;
+import com.intellij.javaee.model.xml.web.Filter;
+import com.intellij.javaee.model.xml.web.Servlet;
+import com.intellij.javaee.model.xml.web.WebApp;
 import com.intellij.javaee.web.WebRoot;
 import com.intellij.javaee.web.facet.WebFacet;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.xml.XmlFile;
+import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomManager;
 import com.intellij.util.xml.model.DomModelFactory;
 import org.intellij.tiles2.dom.TilesDefinitions;
@@ -35,7 +40,8 @@ public class Tiles2ConfigModelFactory extends DomModelFactory<TilesDefinitions, 
      * @param context psi element
      * @return config model
      */
-    @Nullable public Tiles2ConfigModel getModel(@NotNull PsiElement context) {
+    @Nullable
+    public Tiles2ConfigModel getModel(@NotNull PsiElement context) {
         final PsiFile psiFile = context.getContainingFile();
         if (psiFile instanceof XmlFile) {
             return getModelByConfigFile((XmlFile) psiFile);
@@ -53,8 +59,8 @@ public class Tiles2ConfigModelFactory extends DomModelFactory<TilesDefinitions, 
         return models;
     }
 
-    protected Tiles2ConfigModel createCombinedModel(Set<XmlFile> configFiles, TilesDefinitions mergedModel, Tiles2ConfigModel firstModel, Module module) {
-        return new Tiles2ConfigModelImpl(mergedModel, configFiles);
+    protected Tiles2ConfigModel createCombinedModel(Set<XmlFile> xmlFiles, DomFileElement<TilesDefinitions> mergedModel, Tiles2ConfigModel tiles2ConfigModel, Module module) {
+        return new Tiles2ConfigModelImpl(mergedModel.getRootElement(), xmlFiles);
     }
 
     /**
