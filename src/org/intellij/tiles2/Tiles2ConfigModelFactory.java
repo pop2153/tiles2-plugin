@@ -15,7 +15,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomManager;
-import com.intellij.util.xml.model.DomModelFactory;
+import com.intellij.util.xml.model.impl.DomModelFactory;
 import org.intellij.tiles2.dom.TilesDefinitions;
 import org.intellij.tiles2.impl.Tiles2ConfigModelImpl;
 import org.jetbrains.annotations.NotNull;
@@ -53,7 +53,7 @@ public class Tiles2ConfigModelFactory extends DomModelFactory<TilesDefinitions, 
         List<Tiles2ConfigModel> models = new ArrayList<Tiles2ConfigModel>();
         Set<XmlFile> configFiles = getTiles2ConfigFiles(module);
         if (configFiles.size() > 0) {
-            Tiles2ConfigModel model = new Tiles2ConfigModelImpl(createMergedModel(configFiles), configFiles);
+            Tiles2ConfigModel model = new Tiles2ConfigModelImpl(createMergedModelRoot(configFiles).getRootElement(), configFiles);
             models.add(model);
         }
         return models;
