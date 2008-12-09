@@ -17,7 +17,7 @@ import javax.swing.*;
  *
  * @author jacky
  */
-public class Tiles2ApplicationComponent implements ApplicationComponent, IconProvider {
+public class Tiles2ApplicationComponent extends IconProvider implements ApplicationComponent {
     public Tiles2ApplicationComponent() {
     }
 
