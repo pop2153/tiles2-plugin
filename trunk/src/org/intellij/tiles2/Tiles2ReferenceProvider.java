@@ -48,20 +48,20 @@ public class Tiles2ReferenceProvider extends PsiReferenceContributor {
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "definition", new String[]{"template"}, uriReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "insertTemplate", new String[]{"template"}, uriReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2ConfigNamespaceFilter, "put-attribute", new String[]{"value"}, new AttributeReferenceTemplateFilter(), uriReferenceProvider);
-        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "put-attribute", new String[]{"value"}, new AttributeReferenceTemplateFilter(), uriReferenceProvider);
+        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "putAttribute", new String[]{"value"}, new AttributeReferenceTemplateFilter(), uriReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2ConfigNamespaceFilter, "add-attribute", new String[]{"value"}, new AttributeReferenceTemplateFilter(), uriReferenceProvider);
-        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "add-attribute", new String[]{"value"}, new AttributeReferenceTemplateFilter(), uriReferenceProvider);
+        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "addAttribute", new String[]{"value"}, new AttributeReferenceTemplateFilter(), uriReferenceProvider);
         //definition related
         registerXmlAttributeValueReferenceProvider(tiles2ConfigNamespaceFilter, "definition", new String[]{"extends"}, definitionReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "definition", new String[]{"extends"}, definitionReferenceProvider);
-        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "insertDefinition ", new String[]{"name"}, definitionReferenceProvider);
+        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "insertDefinition", new String[]{"name"}, definitionReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2ConfigNamespaceFilter, "put-attribute", new String[]{"value"}, new AttributeReferenceDefinitionFilter(), definitionReferenceProvider);
-        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "put-attribute", new String[]{"value"}, new AttributeReferenceDefinitionFilter(), definitionReferenceProvider);
+        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "putAttribute", new String[]{"value"}, new AttributeReferenceDefinitionFilter(), definitionReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2ConfigNamespaceFilter, "add-attribute", new String[]{"value"}, new AttributeReferenceDefinitionFilter(), definitionReferenceProvider);
-        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "add-attribute", new String[]{"value"}, new AttributeReferenceDefinitionFilter(), definitionReferenceProvider);
+        registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "addAttribute", new String[]{"value"}, new AttributeReferenceDefinitionFilter(), definitionReferenceProvider);
         //other
         registerXmlAttributeValueReferenceProvider(tiles2ConfigNamespaceFilter, "definition", new String[]{"preparer"}, classReferenceProvider);
-        registerXmlAttributeValueReferenceProvider(tiles2ConfigNamespaceFilter, "put-attribute", new String[]{"name"}, attributeGapReferenceProvider);
+        registerXmlAttributeValueReferenceProvider(tiles2ConfigNamespaceFilter, "putAttribute", new String[]{"name"}, attributeGapReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "importAttribute", new String[]{"name"}, definitionAttributeReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "definition", new String[]{"preparer"}, classReferenceProvider);
         registerXmlAttributeValueReferenceProvider(tiles2TaglibNamespaceFilter, "insertAttribute", new String[]{"name"}, putAttributeReferenceProvider);
@@ -81,7 +81,7 @@ public class Tiles2ReferenceProvider extends PsiReferenceContributor {
      * @param tagName         tag name
      */
     private void registerXmlAttributeValueReferenceProvider(final NamespaceFilter namespaceFilter, String tagName, final @NonNls String[] attributeNames, final PsiReferenceProvider provider) {
-        XmlUtil.registerXmlAttributeValueReferenceProvider(registrary, attributeNames, andTagNames(namespaceFilter, tagName), provider);
+        XmlUtil.registerXmlAttributeValueReferenceProvider(registrary, attributeNames, andTagNames(namespaceFilter, TrueFilter.INSTANCE, tagName), provider);
     }
 
     /**
@@ -94,10 +94,10 @@ public class Tiles2ReferenceProvider extends PsiReferenceContributor {
      * @param tagName         tag name
      */
     private void registerXmlAttributeValueReferenceProvider(final NamespaceFilter namespaceFilter, String tagName, final @NonNls String[] attributeNames, ElementFilter filter, final PsiReferenceProvider provider) {
-        XmlUtil.registerXmlAttributeValueReferenceProvider(registrary, attributeNames, new AndFilter(andTagNames(namespaceFilter, tagName), filter), provider);
+        XmlUtil.registerXmlAttributeValueReferenceProvider(registrary, attributeNames, andTagNames(namespaceFilter, filter, tagName), provider);
     }
 
-    public static ScopeFilter andTagNames(final ElementFilter namespace, final String... tagNames) {
-        return new ScopeFilter(new ParentElementFilter(new AndFilter(namespace, TAG_CLASS_FILTER, new TextFilter(tagNames)), 2));
+    public static ScopeFilter andTagNames(final ElementFilter namespace, ElementFilter filter, final String... tagNames) {
+        return new ScopeFilter(new ParentElementFilter(new AndFilter(namespace, filter, TAG_CLASS_FILTER, new TextFilter(tagNames)), 2));
     }
 }
