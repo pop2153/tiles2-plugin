@@ -19,6 +19,6 @@ public class BaseReferenceProvider extends PsiReferenceProvider {
 
     @NotNull
     public PsiReference[] getReferencesByElement(@NotNull PsiElement psiElement, @NotNull ProcessingContext processingContext) {
-        return new PsiReference[0];
+         return getReferencesByElement(psiElement);
     }
 }
