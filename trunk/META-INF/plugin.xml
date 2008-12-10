@@ -29,6 +29,7 @@
     <extensions xmlns="com.intellij">
         <applicationService serviceInterface="org.intellij.tiles2.Tiles2Manager" serviceImplementation="org.intellij.tiles2.impl.Tiles2ManagerImpl"/>
         <dom.fileDescription implementation="org.intellij.tiles2.Tiles2ConfigFileDescription"/>
+        <psi.referenceContributor implementation="org.intellij.tiles2.Tiles2ReferenceProvider"/>
     </extensions>
 
     <application-components>
